@@ -1,0 +1,161 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 210 20% 98%;
+    --foreground: 218 30% 12%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 218 30% 12%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 218 30% 12%;
+
+    --primary: 213 72% 22%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 213 30% 94%;
+    --secondary-foreground: 213 72% 22%;
+
+    --muted: 214 20% 93%;
+    --muted-foreground: 215 16% 47%;
+
+    --accent: 172 66% 42%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 78% 55%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 214 20% 88%;
+    --input: 214 20% 88%;
+    --ring: 213 72% 22%;
+
+    --radius: 0.5rem;
+
+    /* Custom MediFlow tokens */
+    --navy: 213 72% 22%;
+    --navy-dark: 218 72% 14%;
+    --navy-light: 213 50% 32%;
+    --teal: 172 66% 42%;
+    --teal-light: 172 60% 88%;
+    --teal-dark: 172 70% 32%;
+    --surface: 210 20% 97%;
+    --surface-hover: 210 20% 94%;
+    --sidebar-bg: 218 72% 14%;
+
+    --sidebar-background: 218 72% 14%;
+    --sidebar-foreground: 213 30% 88%;
+    --sidebar-primary: 172 66% 42%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 213 40% 20%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 213 40% 20%;
+    --sidebar-ring: 172 66% 42%;
+  }
+
+  .dark {
+    --background: 218 72% 8%;
+    --foreground: 210 40% 96%;
+    --card: 218 60% 11%;
+    --card-foreground: 210 40% 96%;
+    --popover: 218 60% 11%;
+    --popover-foreground: 210 40% 96%;
+    --primary: 172 66% 42%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 213 40% 18%;
+    --secondary-foreground: 210 40% 96%;
+    --muted: 213 40% 18%;
+    --muted-foreground: 215 20% 65%;
+    --accent: 172 66% 42%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 62% 40%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 213 40% 20%;
+    --input: 213 40% 20%;
+    --ring: 172 66% 42%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', sans-serif;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-muted;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-muted-foreground/30 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-muted-foreground/50;
+  }
+}
+
+@layer components {
+  .stat-card {
+    @apply bg-card rounded-lg border border-border p-5 shadow-sm hover:shadow-md transition-shadow duration-200;
+  }
+
+  .nav-item {
+    @apply flex items-center gap-3 px-3 py-2.5 rounded-md text-sm font-medium transition-all duration-150 cursor-pointer;
+  }
+
+  .nav-item-active {
+    @apply bg-[hsl(var(--sidebar-accent))] text-white;
+  }
+
+  .nav-item-inactive {
+    @apply text-[hsl(var(--sidebar-foreground))] hover:bg-[hsl(var(--sidebar-accent))]/60 hover:text-white;
+  }
+
+  .badge-status {
+    @apply inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium;
+  }
+
+  .table-row-hover {
+    @apply hover:bg-muted/50 transition-colors duration-100 cursor-pointer;
+  }
+
+  .btn-primary {
+    @apply bg-[hsl(var(--teal))] hover:bg-[hsl(var(--teal-dark))] text-white font-medium px-4 py-2 rounded-md text-sm transition-colors duration-150 inline-flex items-center gap-2;
+  }
+
+  .btn-secondary {
+    @apply bg-secondary hover:bg-secondary/80 text-secondary-foreground font-medium px-4 py-2 rounded-md text-sm transition-colors duration-150 inline-flex items-center gap-2;
+  }
+
+  .btn-outline {
+    @apply border border-border hover:bg-muted text-foreground font-medium px-4 py-2 rounded-md text-sm transition-colors duration-150 inline-flex items-center gap-2;
+  }
+
+  .section-title {
+    @apply text-lg font-semibold text-foreground;
+  }
+
+  .label-text {
+    @apply text-xs font-medium text-muted-foreground uppercase tracking-wide;
+  }
+
+  .input-field {
+    @apply w-full border border-input rounded-md px-3 py-2 text-sm bg-background focus:outline-none focus:ring-2 focus:ring-[hsl(var(--teal))]/30 focus:border-[hsl(var(--teal))] transition-colors;
+  }
+
+  .select-field {
+    @apply w-full border border-input rounded-md px-3 py-2 text-sm bg-background focus:outline-none focus:ring-2 focus:ring-[hsl(var(--teal))]/30 focus:border-[hsl(var(--teal))] transition-colors;
+  }
+}
