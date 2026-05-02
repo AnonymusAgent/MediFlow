@@ -13,8 +13,11 @@ import UsersAndAudit from '@/components/features/UsersAndAudit';
 import ClinicalNotes from '@/components/features/ClinicalNotes';
 import ERAPosting from '@/components/features/ERAPosting';
 import PatientStatement from '@/components/features/PatientStatement';
+import EPrescription from '@/components/features/EPrescription';
+import PriorAuth from '@/components/features/PriorAuth';
 import { useAppStore } from '@/stores/appStore';
 import { NavModule } from '@/types';
+import { Navigate } from 'react-router-dom';
 
 const MODULE_MAP: Record<NavModule, React.ReactNode> = {
   dashboard: <Dashboard />,
@@ -27,6 +30,8 @@ const MODULE_MAP: Record<NavModule, React.ReactNode> = {
   era: <ERAPosting />,
   coding: <Coding />,
   notes: <ClinicalNotes />,
+  rx: <EPrescription />,
+  priorauth: <PriorAuth />,
   statement: <PatientStatement />,
   reports: <Reports />,
   users: <UsersAndAudit />,
@@ -34,14 +39,15 @@ const MODULE_MAP: Record<NavModule, React.ReactNode> = {
 };
 
 export default function Index() {
-  const { activeModule } = useAppStore();
+  const { activeModule, isAuthenticated } = useAppStore();
+
+  if (!isAuthenticated) {
+    return <Navigate to="/login" replace />;
+  }
 
   return (
     <div className="flex h-screen overflow-hidden bg-background">
-      {/* Sidebar */}
       <Sidebar />
-
-      {/* Main Content */}
       <div className="flex flex-col flex-1 overflow-hidden">
         <Header />
         <main className="flex-1 overflow-y-auto">

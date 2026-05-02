@@ -187,6 +187,8 @@ export type NavModule =
   | 'era'
   | 'coding'
   | 'notes'
+  | 'rx'
+  | 'priorauth'
   | 'statement'
   | 'reports'
   | 'users'

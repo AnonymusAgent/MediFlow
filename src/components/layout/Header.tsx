@@ -2,12 +2,24 @@ import { Bell, Search, Settings, LogOut, ChevronDown } from 'lucide-react';
 import { useAppStore } from '@/stores/appStore';
 import { MOCK_USERS } from '@/constants/mockData';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { cn } from '@/lib/utils';
+import { toast } from 'sonner';
 
 export default function Header() {
-  const { currentUser, setCurrentUser } = useAppStore();
+  const { currentUser, setCurrentUser, logout } = useAppStore();
+  const navigate = useNavigate();
   const [showUserMenu, setShowUserMenu] = useState(false);
   const [showNotifications, setShowNotifications] = useState(false);
+
+  if (!currentUser) return null;
+
+  const handleLogout = () => {
+    logout();
+    setShowUserMenu(false);
+    toast.success('Logged out successfully');
+    navigate('/login');
+  };
 
   const notifications = [
     { id: 1, text: 'Claim CLM-2026-001235 denied by Aetna', time: '10 min ago', type: 'error' },
@@ -116,7 +128,7 @@ export default function Header() {
                 <button className="w-full text-left px-4 py-2 text-xs hover:bg-muted transition-colors flex items-center gap-2 text-muted-foreground">
                   <Settings className="w-3.5 h-3.5" /> Settings
                 </button>
-                <button className="w-full text-left px-4 py-2 text-xs hover:bg-muted transition-colors flex items-center gap-2 text-red-500">
+                <button onClick={handleLogout} className="w-full text-left px-4 py-2 text-xs hover:bg-muted transition-colors flex items-center gap-2 text-red-500">
                   <LogOut className="w-3.5 h-3.5" /> Sign Out
                 </button>
               </div>
